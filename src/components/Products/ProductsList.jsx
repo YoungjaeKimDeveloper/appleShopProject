@@ -9,7 +9,6 @@ import { useSearchParams } from "react-router-dom";
 const ProductsList = () => {
   const [search, setSearch] = useSearchParams();
   const category = search.get("category");
-
   const { data, error } = useData(
     "/products",
     {
