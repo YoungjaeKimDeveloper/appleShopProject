@@ -7,6 +7,7 @@ import apiClient from "../../../utiles/api-client";
 const ProductsList = () => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState("");
+  console.log(products);
   const fetchData = async () => {
     try {
       const response = await apiClient.get("/products");
@@ -15,7 +16,7 @@ const ProductsList = () => {
       setError(error.message);
     }
   };
-  console.log(products);
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -35,7 +36,7 @@ const ProductsList = () => {
       <div className="products_list">
         {error && <em className="error_message">{error}</em>}
         {products.map((product) => (
-          <ProductCard key={product._id} />
+          <ProductCard key={product._id} product={product} />
         ))}
       </div>
     </section>
