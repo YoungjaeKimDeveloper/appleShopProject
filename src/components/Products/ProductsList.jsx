@@ -4,9 +4,21 @@ import "./ProductsList.css";
 import ProductCard from "./ProductCard";
 import apiClient from "../../../utiles/api-client";
 import useData from "../../../hooks/useData";
+import { useSearchParams } from "react-router-dom";
 
 const ProductsList = () => {
-  const { data, error } = useData("/products");
+  const [search, setSearch] = useSearchParams();
+  const category = search.get("category");
+
+  const { data, error } = useData(
+    "/products",
+    {
+      params: {
+        category: category,
+      },
+    },
+    [category]
+  );
 
   return (
     <section className="products_list_section">
