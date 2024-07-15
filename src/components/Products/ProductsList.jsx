@@ -5,18 +5,27 @@ import ProductCard from "./ProductCard";
 import apiClient from "../../../utiles/api-client";
 import useData from "../../../hooks/useData";
 import { useSearchParams } from "react-router-dom";
+import { object } from "zod";
 
 const ProductsList = () => {
   const [search, setSearch] = useSearchParams();
   const category = search.get("category");
+  const page = search.get("page");
+
+  const handleChange = () => {
+    const currentParams = Object.fromEntries([...search]);
+
+    setSearch({ ...currentParams, page: 2 });
+  };
   const { data, error } = useData(
     "/products",
     {
       params: {
         category: category,
+        page: page,
       },
     },
-    [category]
+    [category, page]
   );
 
   return (
@@ -38,6 +47,7 @@ const ProductsList = () => {
           <ProductCard key={product._id} product={product} />
         ))}
       </div>
+      <button onClick={() => handleChange(page)}>Next Page</button>
     </section>
   );
 };
