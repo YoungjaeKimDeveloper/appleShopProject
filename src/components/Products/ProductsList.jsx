@@ -5,6 +5,7 @@ import ProductCard from "./ProductCard";
 import apiClient from "../../../utiles/api-client";
 import useData from "../../../hooks/useData";
 import { useSearchParams } from "react-router-dom";
+import Pagination from "../Common/Pagination/Pagination";
 
 const ProductsList = () => {
   const [search, setSearch] = useSearchParams();
@@ -24,8 +25,11 @@ const ProductsList = () => {
     const currentParams = Object.fromEntries(search);
     setSearch({ ...currentParams, page: page });
   };
-  console.log("THIS IS CURRENT PAGE");
-  console.log(page);
+
+  console.log("THIS IS TotalProducts");
+
+  console.log(data?.totalProducts);
+
   return (
     <section className="products_list_section">
       <header className="align_center products_list_header">
@@ -45,6 +49,12 @@ const ProductsList = () => {
           <ProductCard key={product._id} product={product} />
         ))}
       </div>
+      <Pagination
+        totalPage={data?.totalProducts}
+        perPage={data?.postPerPage}
+        onClick={handlePage}
+        currentPage={page}
+      />
     </section>
   );
 };
