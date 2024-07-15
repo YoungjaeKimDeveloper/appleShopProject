@@ -26,7 +26,8 @@ const ProductsList = () => {
     const currentParams = Object.fromEntries(search);
     setSearch({ ...currentParams, page: page });
   };
-  console.log(data);
+  console.log("THIS IS CURRENT PAGE");
+  console.log(page);
   return (
     <section className="products_list_section">
       <header className="align_center products_list_header">
@@ -50,6 +51,7 @@ const ProductsList = () => {
         totalPage={data?.totalProducts}
         perPage={8}
         onClick={handlePage}
+        currentPage={page}
       />
     </section>
   );

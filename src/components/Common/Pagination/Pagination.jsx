@@ -1,6 +1,6 @@
 import React from "react";
 import "./Pagination.css";
-const Pagination = ({ totalPage, perPage, onClick }) => {
+const Pagination = ({ totalPage, perPage, onClick, currentPage }) => {
   let pages = [];
   for (let i = 1; i <= totalPage / perPage; i++) {
     pages.push(i);
@@ -9,7 +9,9 @@ const Pagination = ({ totalPage, perPage, onClick }) => {
     <ul className="pagination">
       {pages.map((page) => (
         <button
-          className="pagination_page"
+          className={
+            currentPage == page ? "pagination_page actvie" : "pagination_page"
+          }
           key={page}
           onClick={() => onClick(page)}
         >
