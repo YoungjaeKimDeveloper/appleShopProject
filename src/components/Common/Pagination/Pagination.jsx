@@ -2,6 +2,7 @@ import React from "react";
 import "./Pagination.css";
 const Pagination = ({ totalPage, perPage, onClick, currentPage }) => {
   let pages = [];
+  let pages2 = [];
   for (let i = 1; i <= totalPage / perPage; i++) {
     pages.push(i);
   }
