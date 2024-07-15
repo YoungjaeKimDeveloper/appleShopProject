@@ -5,13 +5,11 @@ import ProductCard from "./ProductCard";
 import apiClient from "../../../utiles/api-client";
 import useData from "../../../hooks/useData";
 import { useSearchParams } from "react-router-dom";
-import Pagination from "../Common/Pagination/Pagination";
 
 const ProductsList = () => {
   const [search, setSearch] = useSearchParams();
   const page = search.get("page");
   const category = search.get("category");
-
   const { data, error } = useData(
     "/products",
     {
@@ -47,12 +45,6 @@ const ProductsList = () => {
           <ProductCard key={product._id} product={product} />
         ))}
       </div>
-      <Pagination
-        totalPage={data?.totalProducts}
-        perPage={8}
-        onClick={handlePage}
-        currentPage={page}
-      />
     </section>
   );
 };
