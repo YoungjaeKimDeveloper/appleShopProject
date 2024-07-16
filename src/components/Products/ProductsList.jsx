@@ -26,10 +26,6 @@ const ProductsList = () => {
     setSearch({ ...currentParams, page: page });
   };
 
-  console.log("THIS IS TotalProducts");
-
-  console.log(data?.totalProducts);
-
   return (
     <section className="products_list_section">
       <header className="align_center products_list_header">

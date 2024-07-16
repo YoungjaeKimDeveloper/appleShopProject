@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-
+import { useNavigate } from "react-router-dom";
 import "./SignupPage.css";
 import user from "../../assets/user.webp";
 import { signup } from "../../services/userServices";
@@ -29,6 +29,7 @@ const schema = z
 const SignupPage = () => {
   const [profilePic, setProfilePic] = useState(null);
   const [formError, setFormError] = useState("");
+  let navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -37,7 +38,9 @@ const SignupPage = () => {
 
   const onSubmit = async (formData) => {
     try {
-      await signup(formData, profilePic);
+      const { data } = await signup(formData, profilePic);
+      localStorage.setItem("token", data.token);
+      navigate("/");
     } catch (err) {
       if (err.response && err.response.status === 400) {
         setFormError(err.message);
