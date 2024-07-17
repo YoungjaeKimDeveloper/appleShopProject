@@ -40,7 +40,7 @@ const SignupPage = () => {
     try {
       const { data } = await signup(formData, profilePic);
       localStorage.setItem("token", data.token);
-      navigate("/");
+      window.location = "/";
     } catch (err) {
       if (err.response && err.response.status === 400) {
         setFormError(err.message);

@@ -30,7 +30,7 @@ const LoginPage = () => {
     try {
       const { data } = await login(formData);
       localStorage.setItem("token", data.token);
-      navigate("/");
+      window.location = "/";
     } catch (error) {
       if (error.response && error.response.status === 400) {
         setFormError(error.response.data.message);
